@@ -1,4 +1,4 @@
-package com.capgemeni.objectReadAndWrite;
+package com.capgemini.savingaccountclasses;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -8,45 +8,46 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-
+import java.util.Set;
+import java.util.TreeSet;
 /**
- *  class to initialize object of employee
- * @author tejas
+ * class Bank Account List which will maintain SavingAccount objects 
+ * @author tkhandag
  *
  */
-public class EmployeeReadWrite
+public class BankAccount
 {
 	/**
-	 *method to write objet in file
-	 * @param employee
+	 *Method to  write list Into File
+	 * @param list
 	 * @param path
 	 * @throws IOException
 	 */
-	public void writeObjectToFile(Employee employee , String path) throws IOException 
+	public boolean writeIntoFile(ArrayList<SavingAccount> list , String path) throws IOException 
 	{
+		TreeSet<SavingAccount> accountSet = new TreeSet<SavingAccount>(list);  //Conversion of arraylist into Treeset
 		FileOutputStream fout = new FileOutputStream(path);
 		ObjectOutputStream out = new ObjectOutputStream(fout);
-		out.writeObject(employee);
+		out.writeObject(accountSet);
 		out.close();
 		fout.close();
-
+		return true;
 	}
 	
 	/**
-	 * Method to read object from file
+	 *Method to  read from  File with retuurn type Treeset 
 	 * @param path
 	 * @return
 	 * @throws Exception
 	 */
-	public Employee readObjectFromFile(String path) throws Exception  
-	{
-		 Employee readEmployee =null;
+	public TreeSet<SavingAccount> readFromFile(String path) throws Exception
+	{	
+		TreeSet<SavingAccount> readResult = null;		//Initializing Treeset object to store the result from file
 		 if((new File(path).exists()))
 		 {
 			 FileInputStream fis = new FileInputStream(path);
 			 ObjectInputStream in = new ObjectInputStream(fis); 
-			 readEmployee = (Employee)in.readObject();
-			  
+			 readResult = (TreeSet<SavingAccount>)in.readObject();  
 			 in.close();
 			 fis.close();
 		 }
@@ -55,13 +56,8 @@ public class EmployeeReadWrite
 		 else {
 			 throw new Exception();
 		 }
-		return readEmployee;
-			  
-		  
+		return readResult;
+	 
 	}
 
-	 
 }
-	
-	
-
