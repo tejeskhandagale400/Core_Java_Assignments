@@ -16,8 +16,9 @@ public class TestForCarDetails
 		ParkedCarOwenerList parkedList = new  ParkedCarOwenerList();
 		parkedList.addNewCar(carOne);
 		parkedList.addNewCar(carTwo);
-		System.out.println(parkedList);
+		//System.out.println(parkedList);
 	//	parkedList.removeNewCar(carTwo);
+		  
 		System.out.println(parkedList.getparkedcarlocation(1));
 		//String location = parkedList.getparkedcarlocation(0);
   	}
